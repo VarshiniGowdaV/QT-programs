@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <QDate>
-#include <QLabel>
 
 class MainWindow : public QMainWindow
 {
@@ -23,7 +22,7 @@ private:
     QPushButton *headerButtons[7];
     QPushButton *prevMonthButton;
     QPushButton *nextMonthButton;
-    QLabel *monthYearLabel;
+    QPushButton *monthYearButton;
 
     QDate currentDate;
 

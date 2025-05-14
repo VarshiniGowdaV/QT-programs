@@ -12,28 +12,28 @@ MainWindow::~MainWindow() {}
 
 void MainWindow::setupUI()
 {
-    this->setFixedSize(500, 400);
+    this->setFixedSize(600, 450);
 
     prevMonthButton = new QPushButton("< Previous", this);
-    prevMonthButton->setGeometry(10, 10, 100, 30);
+    prevMonthButton->setGeometry(10, 10, 120, 40);
     connect(prevMonthButton, &QPushButton::clicked, this, &MainWindow::showPreviousMonth);
 
     nextMonthButton = new QPushButton("Next >", this);
-    nextMonthButton->setGeometry(380, 10, 100, 30);
+    nextMonthButton->setGeometry(460, 10, 120, 40);
     connect(nextMonthButton, &QPushButton::clicked, this, &MainWindow::showNextMonth);
 
-    monthYearLabel = new QLabel(this);
-    monthYearLabel->setGeometry(150, 10, 200, 30);
-    monthYearLabel->setAlignment(Qt::AlignCenter);
-    monthYearLabel->setFont(QFont("Arial", 14, QFont::Bold));
+    monthYearButton = new QPushButton("Month Year", this);
+    monthYearButton->setGeometry(170, 10, 250, 40);
+    monthYearButton->setFont(QFont("Arial", 14, QFont::Bold));
+    monthYearButton->setStyleSheet("text-align: center;");
 
-    QStringList weekDays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+    const char* daysOfWeek[7] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
     QFont headerFont;
     headerFont.setBold(true);
     for (int i = 0; i < 7; ++i)
     {
-        headerButtons[i] = new QPushButton(weekDays[i], this);
-        headerButtons[i]->setGeometry(20 + i * 60, 50, 60, 30);
+        headerButtons[i] = new QPushButton(daysOfWeek[i], this);
+        headerButtons[i]->setGeometry(40 + i * 75, 60, 75, 35);
         headerButtons[i]->setFont(headerFont);
         headerButtons[i]->setEnabled(false);
     }
@@ -43,7 +43,7 @@ void MainWindow::setupUI()
         for (int col = 0; col < 7; ++col)
         {
             dayButtons[row][col] = new QPushButton(this);
-            dayButtons[row][col]->setGeometry(20 + col * 60, 90 + row * 50, 60, 40);
+            dayButtons[row][col]->setGeometry(40 + col * 75, 100 + row * 60, 75, 50);
             dayButtons[row][col]->setEnabled(false);
         }
     }
@@ -74,7 +74,7 @@ void MainWindow::updateCalendar()
                 today.month() == currentDate.month() &&
                 today.day() == day)
             {
-                btn->setStyleSheet("background-color: lightblue; font-weight: bold;");
+                btn->setStyleSheet("background-color: Blue; font-weight: bold;");
             }
             else
             {
@@ -85,7 +85,7 @@ void MainWindow::updateCalendar()
         }
     }
 
-    monthYearLabel->setText(currentDate.toString("MMMM yyyy"));
+    monthYearButton->setText(currentDate.toString("MMMM yyyy"));
 }
 
 void MainWindow::clearCalendar()
@@ -112,4 +112,3 @@ void MainWindow::showNextMonth()
     currentDate = currentDate.addMonths(1);
     updateCalendar();
 }
-

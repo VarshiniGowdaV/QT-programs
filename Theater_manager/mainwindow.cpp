@@ -1,14 +1,18 @@
 #include "mainwindow.h"
 #include <QFont>
-
+#include <iostream>
 MainWindow::MainWindow()
     : currentDate(QDate::currentDate())
 {
     setupUI();
     updateCalendar();
+    std::cout<<"Mainwindow constructor called"<<std::endl;
 }
 
-MainWindow::~MainWindow() {}
+MainWindow::~MainWindow()
+{
+   std::cout<<"Mainwindow destructor called"<<std::endl;
+}
 
 void MainWindow::setupUI()
 {
@@ -80,7 +84,6 @@ void MainWindow::updateCalendar()
             {
                 btn->setStyleSheet("");
             }
-
             ++day;
         }
     }

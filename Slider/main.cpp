@@ -1,10 +1,12 @@
-#include "mainwindow.h"
 #include <QApplication>
+#include "sliderapp.h"
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
-    MainWindow window;
+
+    SliderApp window;
     window.show();
+
     return app.exec();
 }
+

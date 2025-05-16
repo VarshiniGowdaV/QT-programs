@@ -5,7 +5,8 @@
 #include <QSlider>
 #include <QLabel>
 
-class SliderApp : public QWidget {
+class SliderApp : public QWidget
+{
     Q_OBJECT
 
 public:

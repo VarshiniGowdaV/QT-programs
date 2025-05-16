@@ -2,7 +2,8 @@
 #include <QVBoxLayout>
 #include <QDebug>
 
-SliderApp::SliderApp(QWidget *parent) : QWidget(parent) {
+SliderApp::SliderApp(QWidget *parent) : QWidget(parent)
+{
     QVBoxLayout *layout = new QVBoxLayout(this);
 
     slider = new QSlider(Qt::Horizontal, this);

@@ -284,6 +284,7 @@ DIST          = /Qt/6.9.0/gcc_64/mkspecs/features/spec_pre.prf \
 		/Qt/6.9.0/gcc_64/mkspecs/features/qt_config.prf \
 		/Qt/6.9.0/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/Qt/6.9.0/gcc_64/mkspecs/features/spec_post.prf \
+		../../.qmake.stash \
 		/Qt/6.9.0/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/Qt/6.9.0/gcc_64/mkspecs/features/toolchain.prf \
 		/Qt/6.9.0/gcc_64/mkspecs/features/default_pre.prf \
@@ -545,6 +546,7 @@ Makefile: ../../Theater_manager.pro ../../../../Qt/6.9.0/gcc_64/mkspecs/features
 		../../../../Qt/6.9.0/gcc_64/mkspecs/features/qt_config.prf \
 		../../../../Qt/6.9.0/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../../Qt/6.9.0/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../../Qt/6.9.0/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../../Qt/6.9.0/gcc_64/mkspecs/features/toolchain.prf \
 		../../../../Qt/6.9.0/gcc_64/mkspecs/features/default_pre.prf \
@@ -786,6 +788,7 @@ Makefile: ../../Theater_manager.pro ../../../../Qt/6.9.0/gcc_64/mkspecs/features
 ../../../../Qt/6.9.0/gcc_64/mkspecs/features/qt_config.prf:
 ../../../../Qt/6.9.0/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../../../Qt/6.9.0/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../../Qt/6.9.0/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../../../Qt/6.9.0/gcc_64/mkspecs/features/toolchain.prf:
 ../../../../Qt/6.9.0/gcc_64/mkspecs/features/default_pre.prf:
@@ -1064,11 +1067,6 @@ moc_mainwindow.cpp: ../../mainwindow.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/QPushButton \
 		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/QGridLayout \
-		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qgridlayout.h \
-		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qlayout.h \
-		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qboxlayout.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtCore/QDate \
 		../../../../Qt/6.9.0/gcc_64/include/QtCore/qdatetime.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtCore/qcalendar.h \
@@ -1093,7 +1091,8 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 ####### Compile
 
 calender.o: ../../calender.cpp ../../calender.h \
-		../../date.h
+		../../date.h \
+		../../theatermanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o calender.o ../../calender.cpp
 
 date.o: ../../date.cpp ../../date.h
@@ -1301,11 +1300,6 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/QPushButton \
 		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/QGridLayout \
-		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qgridlayout.h \
-		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qlayout.h \
-		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qboxlayout.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtCore/QDate \
 		../../../../Qt/6.9.0/gcc_64/include/QtCore/qdatetime.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtCore/qcalendar.h \
@@ -1515,16 +1509,9 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/QPushButton \
 		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/QGridLayout \
-		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qgridlayout.h \
-		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qlayout.h \
-		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qboxlayout.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtCore/QDate \
 		../../../../Qt/6.9.0/gcc_64/include/QtCore/qdatetime.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtCore/qcalendar.h \
-		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/QVBoxLayout \
-		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/QHBoxLayout \
 		../../../../Qt/6.9.0/gcc_64/include/QtGui/QFont
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../../mainwindow.cpp
 
@@ -1532,10 +1519,10 @@ month.o: ../../month.cpp ../../month.h \
 		../../date.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o month.o ../../month.cpp
 
-theater.o: ../../theater.cpp 
+theater.o: ../../theater.cpp ../../theater.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o theater.o ../../theater.cpp
 
-theatermanager.o: ../../theatermanager.cpp 
+theatermanager.o: ../../theatermanager.cpp ../../theatermanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o theatermanager.o ../../theatermanager.cpp
 
 year.o: ../../year.cpp ../../year.h \

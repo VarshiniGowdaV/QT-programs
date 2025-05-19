@@ -1,59 +1,55 @@
-#include "mainwindow.h"
+#include "mainwindow1.h"
 #include <QFont>
 #include <iostream>
-MainWindow::MainWindow()
-    : currentDate(QDate::currentDate())
+Mainwindow1::Mainwindow1()
+    :currentDate(QDate::currentDate())
 {
     setupUI();
     updateCalendar();
     std::cout<<"Mainwindow constructor called"<<std::endl;
 }
-
-MainWindow::~MainWindow()
+Mainwindow1::~Mainwindow1()
 {
-   std::cout<<"Mainwindow destructor called"<<std::endl;
+    std::cout<<"Mainwindow destructor called"<<std::endl;
 }
-
-void MainWindow::setupUI()
+void Mainwindow1::setupUI()
 {
-    this->setFixedSize(600, 500);
+    this->setFixedSize(600,430);
 
-    prevMonthButton = new QPushButton("< Previous", this);
-    prevMonthButton->setGeometry(10, 10, 120, 40);
-    connect(prevMonthButton, &QPushButton::clicked, this, &MainWindow::showPreviousMonth);
+    PrevMonthButton = new QPushButton("< Previous",this);
+    PrevMonthButton->setGeometry(10,10,120,40);
+    connect(PrevMonthButton, &QPushButton::clicked, this, &Mainwindow1::showPreviousMonth);
 
-    nextMonthButton = new QPushButton("Next >", this);
-    nextMonthButton->setGeometry(460, 10, 120, 40);
-    connect(nextMonthButton, &QPushButton::clicked, this, &MainWindow::showNextMonth);
+    nextMonthButton=new QPushButton("Next >",this);
+    nextMonthButton->setGeometry(460,10,120,40);
+    connect(nextMonthButton,&QPushButton::clicked,this,&Mainwindow1::showNextMonth);
 
-    monthYearButton = new QPushButton("Month Year", this);
-    monthYearButton->setGeometry(170, 10, 250, 40);
-    monthYearButton->setFont(QFont("Arial", 14, QFont::Bold));
-    monthYearButton->setStyleSheet("text-align: center;");
+    monthYearButton = new QPushButton("Month Year",this);
+    monthYearButton->setGeometry(170,10,250,40);
+    monthYearButton->setFont(QFont("Arial",14,QFont::Bold));
+    monthYearButton->setStyleSheet("Text-align:center;");
 
-    const char* daysOfWeek[7] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+    const char* daysofWeek[7] = {"Sun","Mon","Tue","Wed","Thu","Fri","Sat"};
     QFont headerFont;
     headerFont.setBold(true);
-    for (int i = 0; i < 7; ++i)
+    for(int i=0;i<7;++i)
     {
-        headerButtons[i] = new QPushButton(daysOfWeek[i], this);
+        headerButtons[i] = new QPushButton(daysofWeek[i], this);
         headerButtons[i]->setGeometry(40 + i * 75, 60, 75, 35);
         headerButtons[i]->setFont(headerFont);
         headerButtons[i]->setEnabled(false);
     }
-
-    for (int row = 0; row < 6; ++row)
+    for(int row = 0 ;row<6;++row)
     {
-        for (int col = 0; col < 7; ++col)
+        for(int col = 0;col < 7;++col)
         {
-            dayButtons[row][col] = new QPushButton(this);
+            dayButtons[row][col]=new QPushButton(this);
             dayButtons[row][col]->setGeometry(40 + col * 75, 100 + row * 60, 75, 50);
             dayButtons[row][col]->setEnabled(false);
         }
     }
 }
-
-void MainWindow::updateCalendar()
+void Mainwindow1::updateCalendar()
 {
     clearCalendar();
 
@@ -90,12 +86,11 @@ void MainWindow::updateCalendar()
 
     monthYearButton->setText(currentDate.toString("MMMM yyyy"));
 }
-
-void MainWindow::clearCalendar()
+void Mainwindow1::clearCalendar()
 {
-    for (int row = 0; row < 6; ++row)
+    for(int row=0;row<6;++row)
     {
-        for (int col = 0; col < 7; ++col)
+        for(int col = 0 ;col < 7;++col)
         {
             dayButtons[row][col]->setText("");
             dayButtons[row][col]->setEnabled(false);
@@ -103,15 +98,13 @@ void MainWindow::clearCalendar()
         }
     }
 }
-
-void MainWindow::showPreviousMonth()
+void Mainwindow1::showPreviousMonth()
 {
-    currentDate = currentDate.addMonths(-1);
+    currentDate=currentDate.addMonths(-1);
     updateCalendar();
 }
-
-void MainWindow::showNextMonth()
+void Mainwindow1::showNextMonth()
 {
-    currentDate = currentDate.addMonths(1);
+    currentDate =currentDate.addMonths(1);
     updateCalendar();
 }

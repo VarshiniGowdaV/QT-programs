@@ -1,6 +1,9 @@
 #include "mainwindow.h"
+#include <QApplication>
+#include <QInputDialog>
+#include <QMessageBox>
 
-MainWindow::MainWindow() : currentDate(QDate::currentDate())
+MainWindow::MainWindow() : currentDate(QDate::currentDate()), selectedDate(QDate::currentDate())
 {
     setupUI();
     updateCalendar();
@@ -24,6 +27,12 @@ void MainWindow::setupUI()
     monthYearButton->setGeometry(150, 10, 200, 30);
     monthYearButton->setEnabled(false);
 
+    QFont boldFont = monthYearButton->font();
+    boldFont.setBold(true);
+    boldFont.setPointSize(12);
+    monthYearButton->setFont(boldFont);
+    monthYearButton->setStyleSheet("color: white; text-align: center;font-weight: bold");
+
     bookTheatreButton = new QPushButton("Book Theatre", this);
     bookTheatreButton->setGeometry(10, 450, 100, 30);
     connect(bookTheatreButton, &QPushButton::clicked, this, &MainWindow::bookTheatre);
@@ -41,7 +50,6 @@ void MainWindow::setupUI()
 
 void MainWindow::setupCalendar()
 {
-    // Initialize the 2D array for calendar buttons (6 rows, 7 columns)
     dayButtons.resize(6);
     for (int i = 0; i < 6; ++i)
     {
@@ -51,6 +59,7 @@ void MainWindow::setupCalendar()
             dayButtons[i][j] = new QPushButton(this);
             dayButtons[i][j]->setGeometry(50 + j * 60, 50 + i * 60, 50, 50);
             dayButtons[i][j]->setEnabled(false);
+            connect(dayButtons[i][j], &QPushButton::clicked, this, &MainWindow::selectDate);
         }
     }
 }
@@ -59,10 +68,12 @@ void MainWindow::updateCalendar()
 {
     clearCalendar();
     QDate firstDay(currentDate.year(), currentDate.month(), 1);
-    int startDay = firstDay.dayOfWeek() % 7;
+    int startDay = firstDay.dayOfWeek() % 7; // Sunday=0
     int daysInMonth = firstDay.daysInMonth();
 
     int day = 1;
+    QDate today = QDate::currentDate();
+
     for (int i = 0; i < 6 && day <= daysInMonth; ++i)
     {
         for (int j = 0; j < 7; ++j)
@@ -74,9 +85,17 @@ void MainWindow::updateCalendar()
             btn->setText(QString::number(day));
             btn->setEnabled(true);
 
-            if (isDateFullyBooked(day))
-            {
-                btn->setStyleSheet("background-color:gray;");
+            QDate thisDay(currentDate.year(), currentDate.month(), day);
+            QString dateStr = thisDay.toString("dd-MM-yyyy");
+
+            if (isDateFullyBooked(day)) {
+                btn->setStyleSheet("background-color: gray;");
+            } else if (thisDay == selectedDate) {
+                btn->setStyleSheet("background-color: grey; font-weight: bold;");
+            } else if (thisDay == today) {
+                btn->setStyleSheet("background-color: lightblue; font-weight: bold;");
+            } else {
+                btn->setStyleSheet("");
             }
 
             ++day;
@@ -100,154 +119,243 @@ void MainWindow::clearCalendar()
     }
 }
 
+void MainWindow::selectDate()
+{
+    QPushButton* senderBtn = qobject_cast<QPushButton*>(sender());
+    if (!senderBtn) return;
+
+    bool ok;
+    int day = senderBtn->text().toInt(&ok);
+    if (!ok) return;
+
+    selectedDate = QDate(currentDate.year(), currentDate.month(), day);
+
+    updateCalendar();
+
+    QMessageBox::information(this, "Date Selected", "You selected " + selectedDate.toString("dd-MM-yyyy"));
+}
+
 void MainWindow::bookTheatre()
 {
+    if (!selectedDate.isValid()) {
+        QMessageBox::warning(this, "No Date Selected", "Please select a date first.");
+        return;
+    }
+
+    QDate today = QDate::currentDate();
+    if (selectedDate < today) {
+        QMessageBox::warning(this, "Invalid Date", "Booking only allowed for today or future dates.");
+        return;
+    }
+
     bool ok;
     int theatreId = QInputDialog::getInt(this, "Book Theatre", "Enter Theatre ID (1-10):", 1, 1, 10, 1, &ok);
     if (ok)
     {
-        QString dateStr = currentDate.toString("dd-MM-yyyy");
-        QMessageBox::information(this, "Booking", "Theatre " + QString::number(theatreId) + " booked for " + dateStr);
+        QString dateStr = selectedDate.toString("dd-MM-yyyy");
+        QSet<int> &booked = bookings[dateStr];
+
+        if (booked.contains(theatreId)) {
+            QMessageBox::warning(this, "Already Booked", "Theatre " + QString::number(theatreId) + " is already booked on " + dateStr);
+        } else {
+            booked.insert(theatreId);
+            QMessageBox::information(this, "Booking", "Theatre " + QString::number(theatreId) + " booked for " + dateStr);
+            updateCalendar();
+        }
     }
 }
 
 void MainWindow::checkBookings()
 {
-    QString dateStr = currentDate.toString("dd-MM-yyyy");
-    int availableTheatres = 10; // Placeholder logic for available theatres
+    QString dateStr = selectedDate.isValid() ? selectedDate.toString("dd-MM-yyyy") : currentDate.toString("dd-MM-yyyy");
+    int bookedCount = bookings[dateStr].size();
+    int availableTheatres = 10 - bookedCount;
     QMessageBox::information(this, "Bookings", QString::number(availableTheatres) + " theatres available on " + dateStr);
 }
 
 bool MainWindow::isDateFullyBooked(int day)
 {
-    // Placeholder logic to check if a date is fully booked
-    return false;
+    QDate thisDay(currentDate.year(), currentDate.month(), day);
+    QString dateStr = thisDay.toString("dd-MM-yyyy");
+    return bookings[dateStr].size() >= 10;
 }
 
 void MainWindow::showPreviousMonth()
 {
     currentDate = currentDate.addMonths(-1);
+    selectedDate = QDate();
     updateCalendar();
 }
 
 void MainWindow::showNextMonth()
 {
     currentDate = currentDate.addMonths(1);
+    selectedDate = QDate();
     updateCalendar();
 }
 
-
 // #include "mainwindow.h"
-// #include <QPushButton>
-// #include <QVBoxLayout>
-// #include <QHBoxLayout>
-// #include <QComboBox>
-// #include <QTextEdit>
-// #include <QCalendarWidget>
-// #include <QLabel>
-// #include <QDate>
-// #include <QMessageBox>
 // #include <QApplication>
+// #include <QInputDialog>
+// #include <QMessageBox>
 
-// MainWindow::MainWindow(QWidget *parent)
-//     : QMainWindow(parent)
+// MainWindow::MainWindow() : currentDate(QDate::currentDate())
 // {
-//     setWindowTitle("Theatre Booking System");
-
-//     calendar = new QCalendarWidget(this);
-//     prevMonthButton = new QPushButton("< Previous Month", this);
-//     nextMonthButton = new QPushButton("Next Month >", this);
-//     bookTheatreButton = new QPushButton("Book Theatre", this);
-//     checkBookingsButton = new QPushButton("Check Bookings", this);
-//     exitButton = new QPushButton("Exit", this);
-//     theatreComboBox = new QComboBox(this);
-//     statusTextEdit = new QTextEdit(this);
-//     monthLabel = new QLabel("April 2025", this);
-
-//     for (int i = 1; i <= 10; ++i) {
-//         theatreComboBox->addItem(QString::number(i));
-//     }
-//     QVBoxLayout *mainLayout = new QVBoxLayout;
-//     QHBoxLayout *topLayout = new QHBoxLayout;
-
-//     topLayout->addWidget(prevMonthButton);
-//     topLayout->addWidget(monthLabel);
-//     topLayout->addWidget(nextMonthButton);
-
-//     mainLayout->addLayout(topLayout);
-//     mainLayout->addWidget(calendar);
-//     mainLayout->addWidget(new QLabel("Select Theatre ID:"));
-//     mainLayout->addWidget(theatreComboBox);
-//     mainLayout->addWidget(bookTheatreButton);
-//     mainLayout->addWidget(checkBookingsButton);
-//     mainLayout->addWidget(exitButton);
-//     mainLayout->addWidget(new QLabel("Status:"));
-//     mainLayout->addWidget(statusTextEdit);
-
-//     QWidget *centralWidget = new QWidget(this);
-//     centralWidget->setLayout(mainLayout);
-//     setCentralWidget(centralWidget);
-
-//     connect(prevMonthButton, &QPushButton::clicked, this, &MainWindow::onPreviousMonthClicked);
-//     connect(nextMonthButton, &QPushButton::clicked, this, &MainWindow::onNextMonthClicked);
-//     connect(bookTheatreButton, &QPushButton::clicked, this, &MainWindow::onBookTheatreClicked);
-//     connect(checkBookingsButton, &QPushButton::clicked, this, &MainWindow::onCheckBookingsClicked);
-//     connect(exitButton, &QPushButton::clicked, this, &MainWindow::onExitClicked);
+//     setupUI();
+//     updateCalendar();
 // }
 
 // MainWindow::~MainWindow() {}
 
-// void MainWindow::onPreviousMonthClicked()
+// void MainWindow::setupUI()
 // {
-//     QDate currentMonth = calendar->selectedDate();
-//     calendar->setSelectedDate(currentMonth.addMonths(-1));
-//     monthLabel->setText(calendar->selectedDate().toString("MMMM yyyy"));
+//     this->setFixedSize(500, 500);
+
+//     prevMonthButton = new QPushButton("< Previous", this);
+//     prevMonthButton->setGeometry(10, 10, 100, 30);
+//     connect(prevMonthButton, &QPushButton::clicked, this, &MainWindow::showPreviousMonth);
+
+//     nextMonthButton = new QPushButton("Next >", this);
+//     nextMonthButton->setGeometry(380, 10, 100, 30);
+//     connect(nextMonthButton, &QPushButton::clicked, this, &MainWindow::showNextMonth);
+
+//     monthYearButton = new QPushButton(this);
+//     monthYearButton->setGeometry(150, 10, 200, 30);
+//     monthYearButton->setEnabled(false);
+
+//     QFont boldFont = monthYearButton->font();
+//     boldFont.setBold(true);
+//     boldFont.setPointSize(12);
+//     monthYearButton->setFont(boldFont);
+//     monthYearButton->setStyleSheet("color: white; text-align: center;font-weight: bold");
+
+
+//     bookTheatreButton = new QPushButton("Book Theatre", this);
+//     bookTheatreButton->setGeometry(10, 450, 100, 30);
+//     connect(bookTheatreButton, &QPushButton::clicked, this, &MainWindow::bookTheatre);
+
+//     checkBookingsButton = new QPushButton("Check Bookings", this);
+//     checkBookingsButton->setGeometry(130, 450, 120, 30);
+//     connect(checkBookingsButton, &QPushButton::clicked, this, &MainWindow::checkBookings);
+
+//     exitButton = new QPushButton("Exit", this);
+//     exitButton->setGeometry(380, 450, 100, 30);
+//     connect(exitButton, &QPushButton::clicked, this, &MainWindow::close);
+
+//     setupCalendar();
 // }
 
-// void MainWindow::onNextMonthClicked()
+// void MainWindow::setupCalendar()
 // {
-//     QDate currentMonth = calendar->selectedDate();
-//     calendar->setSelectedDate(currentMonth.addMonths(1));
-//     monthLabel->setText(calendar->selectedDate().toString("MMMM yyyy"));
-// }
-
-// void MainWindow::onBookTheatreClicked()
-// {
-//     QDate selectedDate = calendar->selectedDate();
-//     int theatreId = theatreComboBox->currentText().toInt();
-
-//     bookedTheatres[selectedDate].append(theatreId);
-
-//     QString status = QString("Theatre %1 booked successfully for %2").arg(theatreId).arg(selectedDate.toString("dd-MM-yyyy"));
-//     updateStatus(status);
-// }
-
-// void MainWindow::onCheckBookingsClicked()
-// {
-//     QDate selectedDate = calendar->selectedDate();
-//     if (bookedTheatres.contains(selectedDate)) {
-//         QList<int> bookedList = bookedTheatres[selectedDate];
-//         if (bookedList.isEmpty()) {
-//             updateStatus("No theatres booked for this date.");
-//         } else {
-//             QStringList bookings;
-//             for (int theatreId : bookedList) {
-//                 bookings.append(QString::number(theatreId));
-//             }
-//             QString status = QString("Theatres booked for %1: %2").arg(selectedDate.toString("dd-MM-yyyy")).arg(bookings.join(", "));
-//             updateStatus(status);
+//     dayButtons.resize(6);
+//     for (int i = 0; i < 6; ++i)
+//     {
+//         dayButtons[i].resize(7);
+//         for (int j = 0; j < 7; ++j)
+//         {
+//             dayButtons[i][j] = new QPushButton(this);
+//             dayButtons[i][j]->setGeometry(50 + j * 60, 50 + i * 60, 50, 50);
+//             dayButtons[i][j]->setEnabled(false);
 //         }
-//     } else {
-//         updateStatus("No theatres booked for this date.");
 //     }
 // }
 
-// void MainWindow::onExitClicked()
+// void MainWindow::updateCalendar()
 // {
-//     QApplication::quit();
+//     clearCalendar();
+//     QDate firstDay(currentDate.year(), currentDate.month(), 1);
+//     int startDay = firstDay.dayOfWeek() % 7;
+//     int daysInMonth = firstDay.daysInMonth();
+
+//     int day = 1;
+//     QDate today = QDate::currentDate();
+
+//     for (int i = 0; i < 6 && day <= daysInMonth; ++i)
+//     {
+//         for (int j = 0; j < 7; ++j)
+//         {
+//             if (i == 0 && j < startDay) continue;
+//             if (day > daysInMonth) break;
+
+//             QPushButton *btn = dayButtons[i][j];
+//             btn->setText(QString::number(day));
+//             btn->setEnabled(true);
+
+//             QDate thisDay(currentDate.year(), currentDate.month(), day);
+//             QString dateStr = thisDay.toString("dd-MM-yyyy");
+
+//             if (isDateFullyBooked(day)) {
+//                 btn->setStyleSheet("background-color: gray;");
+//             } else if (thisDay == today) {
+//                 btn->setStyleSheet("background-color: lightblue; font-weight: bold;");
+//             } else {
+//                 btn->setStyleSheet("");
+//             }
+
+//             ++day;
+//         }
+//     }
+
+//     monthYearButton->setText(currentDate.toString("MMMM yyyy"));
 // }
 
-// void MainWindow::updateStatus(const QString &status)
+// void MainWindow::clearCalendar()
 // {
-//     statusTextEdit->setText(status);
+//     for (int row = 0; row < 6; ++row)
+//     {
+//         for (int col = 0; col < 7; ++col)
+//         {
+//             QPushButton *btn = dayButtons[row][col];
+//             btn->setText("");
+//             btn->setEnabled(false);
+//             btn->setStyleSheet("");
+//         }
+//     }
 // }
+
+// void MainWindow::bookTheatre()
+// {
+//     bool ok;
+//     int theatreId = QInputDialog::getInt(this, "Book Theatre", "Enter Theatre ID (1-10):", 1, 1, 10, 1, &ok);
+//     if (ok)
+//     {
+//         QString dateStr = currentDate.toString("dd-MM-yyyy");
+//         QSet<int> &booked = bookings[dateStr];
+
+//         if (booked.contains(theatreId)) {
+//             QMessageBox::warning(this, "Already Booked", "Theatre " + QString::number(theatreId) + " is already booked on " + dateStr);
+//         } else {
+//             booked.insert(theatreId);
+//             QMessageBox::information(this, "Booking", "Theatre " + QString::number(theatreId) + " booked for " + dateStr);
+//             updateCalendar();
+//         }
+//     }
+// }
+
+// void MainWindow::checkBookings()
+// {
+//     QString dateStr = currentDate.toString("dd-MM-yyyy");
+//     int bookedCount = bookings[dateStr].size();
+//     int availableTheatres = 10 - bookedCount;
+//     QMessageBox::information(this, "Bookings", QString::number(availableTheatres) + " theatres available on " + dateStr);
+// }
+
+// bool MainWindow::isDateFullyBooked(int day)
+// {
+//     QDate thisDay(currentDate.year(), currentDate.month(), day);
+//     QString dateStr = thisDay.toString("dd-MM-yyyy");
+//     return bookings[dateStr].size() >= 10;
+// }
+
+// void MainWindow::showPreviousMonth()
+// {
+//     currentDate = currentDate.addMonths(-1);
+//     updateCalendar();
+// }
+
+// void MainWindow::showNextMonth()
+// {
+//     currentDate = currentDate.addMonths(1);
+//     updateCalendar();
+// }
+

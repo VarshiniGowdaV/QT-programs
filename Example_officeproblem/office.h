@@ -1,14 +1,21 @@
 #ifndef OFFICE_H
 #define OFFICE_H
-#include "employee.h"
+
+#include <vector>
+#include <string>
+#include <iostream>
+#include <employee.h>
+// class Employee;
+
 class Office
 {
-      Employee emp;
 public:
     Office();
     ~Office();
-
-    void printoffice();
+    void addEmployee(Employee* emp);
+    void print();
+private:
+    std::vector<Employee*> employees;
 };
 
 #endif // OFFICE_H

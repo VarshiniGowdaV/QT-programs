@@ -68,7 +68,7 @@ void MainWindow::updateCalendar()
 {
     clearCalendar();
     QDate firstDay(currentDate.year(), currentDate.month(), 1);
-    int startDay = firstDay.dayOfWeek() % 7; // Sunday=0
+    int startDay = firstDay.dayOfWeek() % 7;
     int daysInMonth = firstDay.daysInMonth();
 
     int day = 1;

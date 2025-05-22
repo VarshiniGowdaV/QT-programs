@@ -11,7 +11,7 @@ MainWindow::MainWindow()
 
 MainWindow::~MainWindow()
 {
-   std::cout<<"Mainwindow destructor called"<<std::endl;
+    std::cout<<"Mainwindow destructor called"<<std::endl;
 }
 
 void MainWindow::setupUI()

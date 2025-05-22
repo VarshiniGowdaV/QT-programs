@@ -1070,6 +1070,21 @@ moc_mainwindow.cpp: ../../mainwindow.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtCore/QDate \
 		../../../../Qt/6.9.0/gcc_64/include/QtCore/qdatetime.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtCore/qcalendar.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtCore/QMap \
+		../../../../Qt/6.9.0/gcc_64/include/QtCore/QSet \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/QMessageBox \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qdialog.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/QInputDialog \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qinputdialog.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qlineedit.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qframe.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtGui/qtextcursor.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtGui/qtextdocument.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtGui/qtextformat.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtGui/qpen.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtGui/qtextoption.h \
 		moc_predefs.h \
 		../../../../Qt/6.9.0/gcc_64/libexec/moc
 	/home/varshini-gowda/Qt/6.9.0/gcc_64/libexec/moc $(DEFINES) --include /home/varshini-gowda/cpp/Theater_manager/build/Desktop_Qt_6_9_0-Debug/moc_predefs.h -I/home/varshini-gowda/Qt/6.9.0/gcc_64/mkspecs/linux-g++ -I/home/varshini-gowda/cpp/Theater_manager -I/home/varshini-gowda/Qt/6.9.0/gcc_64/include -I/home/varshini-gowda/Qt/6.9.0/gcc_64/include/QtWidgets -I/home/varshini-gowda/Qt/6.9.0/gcc_64/include/QtGui -I/home/varshini-gowda/Qt/6.9.0/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../mainwindow.h -o moc_mainwindow.cpp
@@ -1303,6 +1318,21 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtCore/QDate \
 		../../../../Qt/6.9.0/gcc_64/include/QtCore/qdatetime.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtCore/qcalendar.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtCore/QMap \
+		../../../../Qt/6.9.0/gcc_64/include/QtCore/QSet \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/QMessageBox \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qdialog.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/QInputDialog \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qinputdialog.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qlineedit.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qframe.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtGui/qtextcursor.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtGui/qtextdocument.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtGui/qtextformat.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtGui/qpen.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtGui/qtextoption.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/QApplication \
 		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
@@ -1512,6 +1542,21 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtCore/QDate \
 		../../../../Qt/6.9.0/gcc_64/include/QtCore/qdatetime.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtCore/qcalendar.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtCore/QMap \
+		../../../../Qt/6.9.0/gcc_64/include/QtCore/QSet \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/QMessageBox \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qdialog.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/QInputDialog \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qinputdialog.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qlineedit.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtWidgets/qframe.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtGui/qtextcursor.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtGui/qtextdocument.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtGui/qtextformat.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtGui/qpen.h \
+		../../../../Qt/6.9.0/gcc_64/include/QtGui/qtextoption.h \
 		../../../../Qt/6.9.0/gcc_64/include/QtGui/QFont
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../../mainwindow.cpp
 

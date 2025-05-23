@@ -15,5 +15,10 @@ void School::addStudent(Student* student)
 }
 void School::printme()
 {
-
+    std::cout<<"School print called"<<std::endl;
+    for(auto student :stduents)
+    {
+        student->printme();
+        std::cout<<student->getname()<<std::endl;
+    }
 }

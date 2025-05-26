@@ -22,6 +22,8 @@ Student::Student(const std::string& name,Student* student)
 Student::~Student()
 {
     std::cout<<"student destructor called"<<std::endl;
+    std::cout<<"student destructor called"<<std::endl;
+
 }
 std::string Student::getname()
 {

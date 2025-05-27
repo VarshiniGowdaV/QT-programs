@@ -1,12 +1,16 @@
-#include "person.h"
+#include "employee.h"
 #include <iostream>
 using namespace std;
 
-void Person::setPersonDetails(string n, int a) {
-    name = n;
-    age = a;
+Employee::Employee() {}
+
+Employee::~Employee() {}
+
+void Employee::setEmployeeID(int id) {
+    empID = id;
 }
 
-void Person::displayPerson() {
-    cout << "Name: " << name << "\nAge: " << age << endl;
+void Employee::displayEmployee() {
+    displayPerson();
+    cout << "Employee ID: " << empID << endl;
 }

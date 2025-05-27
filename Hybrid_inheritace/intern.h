@@ -9,6 +9,8 @@ private:
     string department;
 
 public:
+    Intern();
+    ~Intern();
     void setInternDetails(string dept);
     void displayIntern();
 };

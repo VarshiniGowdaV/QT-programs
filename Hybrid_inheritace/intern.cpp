@@ -2,6 +2,10 @@
 #include <iostream>
 using namespace std;
 
+Intern::Intern() {}
+
+Intern::~Intern() {}
+
 void Intern::setInternDetails(string dept) {
     department = dept;
 }

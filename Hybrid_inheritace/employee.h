@@ -3,11 +3,13 @@
 
 #include "person.h"
 
-class Employee : public Person {
+class Employee : virtual public Person {
 private:
     int empID;
 
 public:
+    Employee();
+    ~Employee();
     void setEmployeeID(int id);
     void displayEmployee();
 };

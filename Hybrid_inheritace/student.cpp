@@ -2,6 +2,10 @@
 #include <iostream>
 using namespace std;
 
+Student::Student() {}
+
+Student::~Student() {}
+
 void Student::setStudentID(int id) {
     studentID = id;
 }

@@ -10,6 +10,8 @@ private:
     int age;
 
 public:
+    Person();
+    ~Person();
     void setPersonDetails(string n, int a);
     void displayPerson();
 };

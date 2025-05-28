@@ -3,15 +3,11 @@
 
 #include "person.h"
 
-class Employee : virtual public Person {
-private:
-    int empID;
-
+class Employee :virtual public Person {
 public:
-    Employee();
+    Employee(string name,int age);
     ~Employee();
-    void setEmployeeID(int id);
-    void displayEmployee();
+
 };
 
 #endif

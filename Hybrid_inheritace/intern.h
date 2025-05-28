@@ -5,14 +5,11 @@
 #include "employee.h"
 
 class Intern : public Student, public Employee {
-private:
-    string department;
 
 public:
-    Intern();
+    Intern(string name,int age);
     ~Intern();
-    void setInternDetails(string dept);
-    void displayIntern();
+
 };
 
 #endif

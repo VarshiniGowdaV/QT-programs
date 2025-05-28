@@ -4,14 +4,10 @@
 #include "person.h"
 
 class Student : virtual public Person {
-private:
-    int studentID;
-
 public:
-    Student();
+    Student(string name,int age);
     ~Student();
-    void setStudentID(int id);
-    void displayStudent();
+
 };
 
 #endif

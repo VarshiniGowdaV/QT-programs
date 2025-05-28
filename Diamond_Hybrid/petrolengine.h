@@ -1,7 +1,7 @@
 #ifndef PETROLENGINE_H
 #define PETROLENGINE_H
 #include "engine.h"
-class Petrolengine:virtual public Engine
+class Petrolengine: public Engine
 {
 public:
     Petrolengine(int a,int b);

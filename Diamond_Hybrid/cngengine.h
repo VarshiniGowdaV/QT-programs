@@ -1,7 +1,7 @@
 #ifndef CNGENGINE_H
 #define CNGENGINE_H
 #include "engine.h"
-class CNGengine:virtual public Engine
+class CNGengine: public Engine
 {
 public:
     CNGengine();

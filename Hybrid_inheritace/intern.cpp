@@ -1,17 +1,14 @@
 #include "intern.h"
 #include <iostream>
+
 using namespace std;
 
-Intern::Intern() {}
-
-Intern::~Intern() {}
-
-void Intern::setInternDetails(string dept) {
-    department = dept;
+Intern::Intern(string name, int age)
+    :Person(name,age),Student(name, age), Employee(name, age)
+{
+    cout<<"Intern constructor called"<<endl;
 }
-
-void Intern::displayIntern() {
-    cout << "Intern Details:" << endl;
-    Student::displayStudent();
-    cout << "Department: " << department << endl;
+Intern::~Intern()
+{
+    cout<<"Intern destructor called"<<endl;
 }

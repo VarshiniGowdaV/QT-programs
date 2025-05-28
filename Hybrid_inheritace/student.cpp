@@ -2,15 +2,13 @@
 #include <iostream>
 using namespace std;
 
-Student::Student() {}
-
-Student::~Student() {}
-
-void Student::setStudentID(int id) {
-    studentID = id;
+Student::Student(string name,int age)
+    :Person(name,age)
+{
+    cout<<"student constructor called"<<endl;
 }
 
-void Student::displayStudent() {
-    displayPerson();
-    cout << "Student ID: " << studentID << endl;
+Student::~Student()
+{
+    cout<<"Student destructor called"<<endl;
 }

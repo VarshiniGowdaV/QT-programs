@@ -2,11 +2,12 @@
 #include <iostream>
 using namespace std;
 
-void Employee::setEmployeeID(int id) {
-    empID = id;
+Employee::Employee(string name,int age)
+    :Person(name,age)
+{
+    cout<<"Employee constructor called"<<endl;
 }
-
-void Employee::displayEmployee() {
-    displayPerson();
-    cout << "Employee ID: " << empID << endl;
+Employee::~Employee()
+{
+    cout<<"Employee destructor called"<<endl;
 }

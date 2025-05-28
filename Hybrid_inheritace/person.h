@@ -6,14 +6,16 @@ using namespace std;
 
 class Person {
 private:
-    string name;
-    int age;
+    string m_name;
+    int m_age;
 
 public:
-    Person();
+    Person(string name,int age);
     ~Person();
-    void setPersonDetails(string n, int a);
-    void displayPerson();
+    string getname();
+    int getage();
+    void setPersonDetails(string name, int age);
+    void display();
 };
 
 #endif

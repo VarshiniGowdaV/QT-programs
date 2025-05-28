@@ -1,13 +1,7 @@
 #include "intern.h"
 
 int main() {
-    Intern intern;
-
-    intern.Student::setPersonDetails("varshi", 21);
-    intern.setStudentID(1001);
-    intern.setInternDetails("Software Development");
-
-    intern.displayIntern();
-
+    Intern intern("varshini",22);
+    intern.display();
     return 0;
 }

@@ -11,7 +11,8 @@
 #include "student.h"
 #include "teacher.h"
 
-int main() {
+int main()
+{
     Student* s = new Student("Varshi", 22, "Computer Science");
     Teacher* t = new Teacher("Dr. Raju", 44, "Maths");
 

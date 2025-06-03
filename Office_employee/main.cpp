@@ -18,17 +18,23 @@ int main()
     cout << "\nFinding child in Employee list:\n";
     Baseobjectclass* found = e1->findChild("darshini");
     if (found)
+    {
         cout << "Found: " << found->GetName() << endl;
+    }
     else
+    {
         cout << "Not Found\n";
-
+    }
     cout << "\nFinding child in Office list:\n";
-    found = off1->findChild("navya");
+    found = off1->findChild("vidya");
     if (found)
+    {
         cout << "Found: " << found->GetName() << endl;
+    }
     else
+    {
         cout << "Not Found\n";
-
+    }
     cout << "\nCalling getme function:\n";
     Baseobjectclass* ptr = e2;
     ptr->getme();

@@ -12,7 +12,7 @@ int main()
     Employee* e4 = new Employee("varshini", e1);
     Employee* e5 = new Employee("vidya", e3);
 
-    cout << "Printing all objects:\n";
+    cout << "Printing all employees:\n";
     Baseobjectclass::print();
 
     cout << "\nFinding child in Employee list:\n";

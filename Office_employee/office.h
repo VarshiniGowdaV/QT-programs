@@ -3,7 +3,8 @@
 
 #include "baseobjectclass.h"
 
-class Office : public Baseobjectclass {
+class Office : public Baseobjectclass
+{
 public:
     Office();
     ~Office();

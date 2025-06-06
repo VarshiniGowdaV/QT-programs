@@ -1,6 +1,5 @@
 #ifndef BASEOBJECTCLASS_H
 #define BASEOBJECTCLASS_H
-
 #include <iostream>
 #include <vector>
 #include <string>

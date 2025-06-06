@@ -3,7 +3,8 @@
 
 #include "baseobjectclass.h"
 
-class Employee : public Baseobjectclass {
+class Employee : public Baseobjectclass
+{
 public:
     Employee(std::string name, Baseobjectclass* parent);
     ~Employee();

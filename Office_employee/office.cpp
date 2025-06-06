@@ -9,21 +9,28 @@ Office::~Office()
 {
     std::cout<<"Office destructor called"<<std::endl;
 }
-void Office::getme() const {
+void Office::getme() const
+{
     std::cout << "This is the Office." << std::endl;
 }
 
-Baseobjectclass* Office::findChild(const std::string& childName) {
+Baseobjectclass* Office::findChild(const std::string& childName)
+{
     std::cout << "Searching in Office: " << name << std::endl;
 
-    if (name == childName) {
+    if (name == childName)
+    {
         std::cout << "Matched Office: " << name << std::endl;
         return this;
     }
 
-    for (auto child : children) {
+    for (auto child : children)
+    {
         Baseobjectclass* found = child->findChild(childName);
-        if (found) return found;
+        if (found)
+        {
+            return found;
+        }
     }
 
     return nullptr;

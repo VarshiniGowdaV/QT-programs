@@ -82,6 +82,59 @@ void MyWidget::setShape()
     }
 }
 
+// void MyWidget::paintEvent(QPaintEvent *event)
+// {
+//     Q_UNUSED(event);
+//     QPainter painter(this);
+
+//     QColor borderColor = colorMap.value(borderColorCombo->currentText(), Qt::black);
+//     QColor fillColor = colorMap.value(fillColorCombo->currentText(), Qt::white);
+//     int penSize = penSizeCombo->currentText().toInt();
+
+//     painter.setPen(QPen(borderColor, penSize));
+//     painter.setBrush(fillColor);
+
+//     QRect drawRect(rectX, rectY, rectWidth, rectHeight);
+
+//     if (selectedShape == "Rectangle" || selectedShape == "Square")
+//     {
+//         painter.drawRect(drawRect);
+//     }
+//     else if (selectedShape == "Circle")
+//     {
+//         painter.drawEllipse(drawRect);
+//     }
+//     else if (selectedShape == "Triangle")
+//     {
+//         QPolygon triangle;
+//         triangle << QPoint(rectX + rectWidth / 2, rectY)
+//                  << QPoint(rectX, rectY + rectHeight)
+//                  << QPoint(rectX + rectWidth, rectY + rectHeight);
+//         painter.drawPolygon(triangle);
+//     }
+//     else if (selectedShape == "Rhombus")
+//     {
+//         QPolygon rhombus;
+//         rhombus << QPoint(rectX + rectWidth / 2, rectY)
+//                 << QPoint(rectX + rectWidth, rectY + rectHeight / 2)
+//                 << QPoint(rectX + rectWidth / 2, rectY + rectHeight)
+//                 << QPoint(rectX, rectY + rectHeight / 2);
+//         painter.drawPolygon(rhombus);
+//     }
+//     else if (selectedShape == "Line")
+//     {
+//         painter.drawLine(rectX, rectY, rectX + rectWidth, rectY + rectHeight);
+//     }
+//     else if (selectedShape == "Curve")
+//     {
+//         QPainterPath path;
+//         path.moveTo(rectX, rectY + rectHeight / 2);
+//         path.cubicTo(rectX + rectWidth / 3, rectY - 40,
+//                      rectX + 2 * rectWidth / 3, rectY + rectHeight + 40,
+//                      rectX + rectWidth, rectY + rectHeight / 2);
+//         painter.drawPath(path);
+//     }
+// }
 void MyWidget::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
@@ -96,9 +149,15 @@ void MyWidget::paintEvent(QPaintEvent *event)
 
     QRect drawRect(rectX, rectY, rectWidth, rectHeight);
 
-    if (selectedShape == "Rectangle" || selectedShape == "Square")
+    if (selectedShape == "Rectangle")
     {
         painter.drawRect(drawRect);
+    }
+    else if (selectedShape == "Square")
+    {
+        int size = qMin(rectWidth, rectHeight);
+        QRect squareRect(rectX, rectY, size, size);
+        painter.drawRect(squareRect);
     }
     else if (selectedShape == "Circle")
     {

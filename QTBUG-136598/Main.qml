@@ -1,27 +1,51 @@
+// import QtQuick 2.15
+// import QtQuick.Controls 2.15
+// import QtQuick.Window 2.15
+
+//     Button {
+//             text: "button"
+//             enabled: false
+
+//             ToolTip.text: "some text"
+//             ToolTip.visible: hovered
+
+//             MouseArea {
+//                 anchors.fill: parent
+//                 hoverEnabled: true
+//                 onEntered: console.log("ENTERED!")
+//             }
+//         }
+
+
+
+// fixed_hover_example.qml
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Window 2.15
 
-ApplicationWindow
-{
+ApplicationWindow {
     visible: true
     width: 400
     height: 200
-    title: qsTr("Qt 6 Bug Reproduction")
-Button
-{
-    id: myButton
-    text: "button"
-    enabled: false
+    title: "Fixed Hover Example (Qt 6)"
 
-    ToolTip.text: "some text"
-    ToolTip.visible: hovered
+    Button {
+        id: myButton
+        text: "Disabled"
+        anchors.centerIn: parent
+        enabled: false  // ✅ Same disabled state
 
-    MouseArea {
-        anchors.fill: parent
-        hoverEnabled: true
-        enabled: myButton.enabled
-        onEntered: console.log("ENTERED!")
+        ToolTip.text: "Some tooltip"
+        ToolTip.visible: hovered
+
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+
+            // ✅ FIX: Disable MouseArea when button is disabled
+            enabled: parent.enabled
+
+            onEntered: console.log("✅ Hover triggered")
+        }
     }
-}
 }

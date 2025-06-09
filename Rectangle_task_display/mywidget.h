@@ -1,19 +1,21 @@
+
 #ifndef MYWIDGET_H
 #define MYWIDGET_H
 
 #include <QWidget>
-#include <QComboBox>
 #include <QPushButton>
+#include <QComboBox>
 #include <QMap>
 
 class MyWidget : public QWidget
 {
     Q_OBJECT
+
 private:
-    int reactX;
-    int reactY;
-    int reactWight;
-    int reactHeight;
+    int rectX;
+    int rectY;
+    int rectWidth;
+    int rectHeight;
 
     QString selectedShape = "Rectangle";
 
@@ -21,13 +23,15 @@ private:
     QComboBox *borderColorCombo;
     QComboBox *fillColorCombo;
 
-    QMap<QString,QColor> colorMap;
+    QMap<QString, QColor> colorMap;
 
 public:
-    MyWidget(int x,int y,int width,int height,QWidget *parent = nullptr);
+    MyWidget(int x, int y, int width, int height, QWidget *parent = nullptr);
     ~MyWidget();
+
 protected:
-    void paintEvent(QPaintEvent *event)override;
+    void paintEvent(QPaintEvent *event) override;
+
 private slots:
     void setShape();
 };

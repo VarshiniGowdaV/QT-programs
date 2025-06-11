@@ -1,51 +1,48 @@
+
+
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Window 2.15
+Button {
+       text: "button"
+       enabled: false
+
+       ToolTip.text: "some text"
+       ToolTip.visible: hovered
+
+       MouseArea {
+           anchors.fill: parent
+           hoverEnabled: true
+           onEntered: console.log("ENTERED!")
+       }
+   }
+
 // import QtQuick 2.15
 // import QtQuick.Controls 2.15
 // import QtQuick.Window 2.15
 
+// ApplicationWindow {
+//     width: 400
+//     height: 300
+//     visible: true
+//     title: "Button Hover Bug Workaround"
+
 //     Button {
-//             text: "button"
-//             enabled: false
+//         id: myButton
+//         text: "Disabled Button"
+//         anchors.centerIn: parent
+//         enabled: false  // Simulate disabled state
 
-//             ToolTip.text: "some text"
-//             ToolTip.visible: hovered
+//         ToolTip.text: "some text"
+//         ToolTip.visible: hovered && enabled  // <-- Prevent tooltip when disabled
 
-//             MouseArea {
-//                 anchors.fill: parent
-//                 hoverEnabled: true
-//                 onEntered: console.log("ENTERED!")
-//             }
+//         MouseArea {
+//             anchors.fill: parent
+//             hoverEnabled: true
+//             enabled: parent.enabled           // <-- Prevent hover events when disabled
+//             onEntered: console.log("ENTERED!")  // <-- Will not trigger when disabled
 //         }
+//     }
+// }
 
 
-
-// fixed_hover_example.qml
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Window 2.15
-
-ApplicationWindow {
-    visible: true
-    width: 400
-    height: 200
-    title: "Fixed Hover Example (Qt 6)"
-
-    Button {
-        id: myButton
-        text: "Disabled"
-        anchors.centerIn: parent
-        enabled: false  // ✅ Same disabled state
-
-        ToolTip.text: "Some tooltip"
-        ToolTip.visible: hovered
-
-        MouseArea {
-            anchors.fill: parent
-            hoverEnabled: true
-
-            // ✅ FIX: Disable MouseArea when button is disabled
-            enabled: parent.enabled
-
-            onEntered: console.log("✅ Hover triggered")
-        }
-    }
-}

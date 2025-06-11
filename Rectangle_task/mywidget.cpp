@@ -141,4 +141,3 @@ void MyWidget::paintEvent(QPaintEvent *event)
     }
 }
 
-

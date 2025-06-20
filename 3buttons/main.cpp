@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     MyWidget w;
-    w.show();  // ✅ Only w.show() here
+    w.show();
 
     return app.exec();
 }

@@ -1,86 +1,102 @@
 // #include <QCoreApplication>
-// #include <QMultiMap>
+// #include <QMultiHash>
 // #include <QDebug>
+
+// int main(int argc, char *argv[])
+// {
+//     QCoreApplication a(argc, argv);
+    // QMultiHash<int ,int>myhash;
+    // myhash.insert(10,1);
+    // myhash.insert(20,2);
+    // myhash.insert(5,3);
+    // myhash.insert(10,2);
+    // myhash.insert(4,3);
+    // myhash.insert(6,3);
+    // myhash.insert(10,2);
+    // myhash.insert(6,2);
+    // myhash.insert(8,2);
+    // myhash.insert(10,2);
+    // myhash.insert(4,2);
+    // myhash.insert(1,2);
+    // myhash.insert(10,5);
+
+    //qDebug() <<"Values of the numbers :" <<myhash;
+//     return 0;
+// }
+
+
+// #include <QCoreApplication>
+// #include <QHash>
+// #include <QDebug>
+
 // int main(int argc, char *argv[])
 // {
 //     QCoreApplication a(argc, argv);
 
-//     QMultiMap<QString, int> map;
-//     map.insert("apple", 1);
-//     map.insert("apple", 6);
-//     map.insert("pple", 2);
-//     map.insert("e", 0);
-//     map.insert("banana",4);
-//     map.insert("pineapple",5);
-//     map.insert("gova",9);
-//     map.insert("mango",9);
-//     map.insert("orange",8);
-//     map.insert("kiwi",3);
-//     map.insert("grapes",7);
-    // QMultiMap<QString, int> tmap;
-    // tmap.insert("apple", 8);
-    // tmap.insert("bapple", 9);
-    // tmap.insert("zapple", 10);
-    // QMultiMap<int, int> mymap;
-    // mymap.insert(10, 1);
-    // mymap.insert(0, 2);
-    // mymap.insert(10, 10);
-    // QMultiMap<float ,int>qmap;
-    // qmap.insert(10.8,1);
-    // qmap.insert(10.6,2);    // QMultiMap<QString, int> tmap;
-    // tmap.insert("apple", 8);
-    // tmap.insert("bapple", 9);
-    // tmap.insert("zapple", 10);
-    // QMultiMap<int, int> mymap;
-    // mymap.insert(10, 1);
-    // mymap.insert(0, 2);
-    // mymap.insert(10, 10);
-    // QMultiMap<float ,int>qmap;
-    // qmap.insert(10.8,1);
-    // qmap.insert(10.6,2);
-    // qmap.insert(10.9,3);
+//     QHash<int, int> myHash;
+//     myHash.insert(10, 1);
+//     myHash.insert(20, 2);
+//     myHash.insert(5, 3);
+//     myHash.insert(10, 2);  // Overwrites previous value for key 10
+//     myHash.insert(4, 3);
+//     myHash.insert(6, 3);
+//     myHash.insert(10, 2);  // Overwrites again
+//     myHash.insert(6, 2);   // Overwrites previous value for key 6
+//     myHash.insert(8, 2);
+//     myHash.insert(10, 2);  // Overwrites again
+//     myHash.insert(4, 2);   // Overwrites previous value for key 4
+//     myHash.insert(1, 2);
+//     myHash.insert(10, 5);  // Final overwrite for key 10
 
-    // qDebug() <<"Valued number : "<<tmap;
-
-    // qDebug() <<"Valued number : "<<map;
-    // qDebug() << "Values for key 'apple':" << mymap;
-    // qmap.insert(10.9,3);
-
-    // qDebug() <<"Valued number : "<<tmap;
-
-    // qDebug() <<"Valued number : "<<map;
-    // qDebug() << "Values for key 'apple':" << mymap;
-//     qDebug() <<"Valued number : "<<map;
+//        qDebug() <<"Values of the numbers :" <<myHash;
 
 //     return 0;
 // }
 
 
-#include <QCoreApplication>
-#include <QMultiHash>
-#include <QDebug>
+// #include <QCoreApplication>
+// #include <QMultiMap>
+// #include <QDebug>
+// int main(int argc, char *argv[])
+// {
+//     QCoreApplication a(argc, argv);
+//     QMultiMap<int, int> mymap;
+//      mymap.insert(10, 1);
+//      mymap.insert(0, 2);
+//      mymap.insert(10,2);
+//      mymap.insert(2, 1);
+//      mymap.insert(1, 5);
+//      mymap.insert(10, 3);
+//      mymap.insert(5, 4);
+//      mymap.insert(1, 2);
+//      mymap.insert(4, 1);
+//      mymap.insert(10, 4);
+//      mymap.insert(10, 10);
 
+//      qDebug() <<"value of the number :"<<mymap;
+//      return 0;
+// }
+
+#include <QCoreApplication>
+#include <QMap>
+#include <QDebug>
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
+    QMap<int, int> mymap;
+     mymap.insert(10, 1);
+     mymap.insert(0, 2);
+     mymap.insert(10,2);
+     mymap.insert(2, 1);
+     mymap.insert(1, 5);
+     mymap.insert(10, 3);
+     mymap.insert(5, 4);
+     mymap.insert(1, 2);
+     mymap.insert(4, 1);
+     mymap.insert(10, 4);
+     mymap.insert(10, 10);
 
-    QMultiHash<QString, int>hash;
-    hash.insert("apple", 1);
-    hash.insert("apple", 1);
-    hash.insert("pple", 2);
-    hash.insert("e", 0);
-    QMultiHash<int ,int>myhash;
-    myhash.insert(10,1);
-    myhash.insert(20,2);
-    myhash.insert(5,3);
-
-    QMultiHash<float ,int>qhash;
-    qhash.insert(10.8,2);
-    qhash.insert(10.6,1);
-    qhash.insert(10.9,3);
-
-    qDebug() << "Values for key 'apple':" << hash;
-    qDebug() <<"Values of the numbers :" <<myhash;
-    qDebug() <<"Valued number : "<<qhash;
-    return 0;
+     qDebug() <<"value of the number :"<<mymap;
+     return 0;
 }
+

@@ -5,22 +5,22 @@
 // int main(int argc, char *argv[])
 // {
 //     QCoreApplication a(argc, argv);
-    // QMultiHash<int ,int>myhash;
-    // myhash.insert(10,1);
-    // myhash.insert(20,2);
-    // myhash.insert(5,3);
-    // myhash.insert(10,2);
-    // myhash.insert(4,3);
-    // myhash.insert(6,3);
-    // myhash.insert(10,2);
-    // myhash.insert(6,2);
-    // myhash.insert(8,2);
-    // myhash.insert(10,2);
-    // myhash.insert(4,2);
-    // myhash.insert(1,2);
-    // myhash.insert(10,5);
+//     QMultiHash<int ,int>myhash;
+//     myhash.insert(10,1);
+//     myhash.insert(20,2);
+//     myhash.insert(5,3);
+//     myhash.insert(10,2);
+//     myhash.insert(4,3);
+//     myhash.insert(6,3);
+//     myhash.insert(10,2);
+//     myhash.insert(6,2);
+//     myhash.insert(8,2);
+//     myhash.insert(10,2);
+//     myhash.insert(4,2);
+//     myhash.insert(1,2);
+//     myhash.insert(10,5);
 
-    //qDebug() <<"Values of the numbers :" <<myhash;
+//     qDebug() <<"Values of the numbers :" <<myhash;
 //     return 0;
 // }
 
@@ -72,6 +72,9 @@
 //      mymap.insert(4, 1);
 //      mymap.insert(10, 4);
 //      mymap.insert(10, 10);
+//      mymap.insert(10, 0);
+//      mymap.insert(10, 2);
+
 
 //      qDebug() <<"value of the number :"<<mymap;
 //      return 0;
